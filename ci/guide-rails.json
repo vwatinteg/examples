@@ -65,9 +65,9 @@
 						"name": "node-samples",
 						"steps": [
 							{
-								"name": "NOOP",
-								"definition": "NOOP",
-								"command": "echo \"NOOP\"",
+								"name": "Get dependencies",
+								"definition": "Get dependencies",
+								"command": "cd servers/express/api-with-express-and-handlebars\nnpm install",
 								"properties": null
 							}
 						],
