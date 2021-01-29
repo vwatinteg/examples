@@ -1,0 +1,85 @@
+{
+	"metadata": {
+		"version": 1
+	},
+	"application": {
+		"name": "node-samples",
+		"language": "NODEJS",
+		"artifact_store": {
+			"repositories": null
+		}
+	},
+	"pipeline": {
+		"segments": [
+			{
+				"name": "Build",
+				"segment_type": "build",
+				"exit_actions": {},
+				"properties": [
+					{
+						"name": "npm.cache",
+						"description": "npm cache path is set to ${SEGMENT_BASE_DIR}/cache/.npm by default, when caching is enabled. Caches are maintained on the worker where your build gets allocated. For a new worker assigned to the build, the cache will be re-created",
+						"value": "${SEGMENT_BASE_DIR}/cache/.npm",
+						"type": "string"
+					},
+					{
+						"name": "gr.whitesource.opensource.scan",
+						"value": true,
+						"type": "boolean"
+					}
+				],
+				"deployment_strategy": {},
+				"application_init": {},
+				"instance_tags": [
+					{
+						"name": "application.name",
+						"value": "((application.name))"
+					}
+				],
+				"post_deployment_actions": {
+					"instances": null,
+					"loadbalanced": false,
+					"loadbalancer": {
+						"TargetGroupName": "",
+						"TargetGroupPort": 0,
+						"TargetGroupProtocol": "",
+						"TargetType": "",
+						"VPCID": "",
+						"HealthCheckEnabled": false,
+						"HealthCheckPort": "",
+						"UnhealthyThresholdCount": 0
+					}
+				},
+				"cache_info": {
+					"paths": [
+						"((npm.cache))"
+					]
+				},
+				"tasks": [
+					{
+						"name": "node-samples",
+						"steps": [
+							{
+								"name": "NOOP",
+								"definition": "NOOP",
+								"command": "echo \"NOOP\"",
+								"properties": null
+							}
+						],
+						"docker_options": {}
+					}
+				]
+			}
+		],
+		"exit_actions": {},
+		"default_properties": null,
+		"deployment_files": [],
+		"application_init": {
+			"command": "bin/start-service.sh"
+		},
+		"releases": []
+	},
+	"organization": {
+		"orgname": "GR-Product"
+	}
+}
